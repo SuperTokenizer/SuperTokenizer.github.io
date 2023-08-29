@@ -238,7 +238,7 @@ $(function () {
   /* *******   initialize Counter plugin ********/
   fireCounter();
 
-  /* ********* set the Background Image path and opacity for elements that has the  a vlaue for data-bg-img attribute***********/
+  /* ********* set the Background Image path and opacity for elements that has the  a value for data-bg-img attribute***********/
   const bg_img = $("*");
   bg_img.each(function () {
     if ($(this).attr("data-bg-img")) {

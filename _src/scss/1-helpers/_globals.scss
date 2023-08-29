@@ -30,7 +30,7 @@ $fontMain: "";
   margin-bottom: 0;
   padding-#{$start-direction}: 10px;
   padding-#{$end-direction}: 10px;
-  color: $clr-main;
+  color: #ff5000;
   z-index: 5;
 
   &::before,
@@ -43,7 +43,7 @@ $fontMain: "";
     border-radius: 1rem;
     top: 50%;
     translate: 0 -50%;
-    background-color: $clr-main;
+    background-color: #ff5000;
   }
 
   &::before {
@@ -159,7 +159,7 @@ $g-colors: red, blue, green;
     height: calc(100% + 40px);
     transform: translate(-50%, -50%);
     path {
-      stroke: $clr-main;
+      stroke: #ff5000;
       stroke-width: 0.5rem;
       fill: transparent;
     }
@@ -456,11 +456,11 @@ $g-colors: red, blue, green;
 
     &.off {
       -webkit-text-fill-color: transparent;
-      -webkit-text-stroke-color: $clr-main;
+      -webkit-text-stroke-color: #ff5000;
       -webkit-text-stroke-width: 1px;
 
       &:hover {
-        -webkit-text-fill-color: $clr-main;
+        -webkit-text-fill-color: #ff5000;
       }
     }
   }
@@ -493,7 +493,7 @@ $g-colors: red, blue, green;
 
     .bar {
       width: 0;
-      background-color: $clr-main;
+      background-color: #ff5000;
       height: inherit;
       border-radius: inherit;
       @include ma-transition(width, 1s, ease-in-out);
@@ -524,9 +524,9 @@ $g-colors: red, blue, green;
       justify-content: center;
       width: 2.25rem;
       height: 2.25rem;
-      color: $clr-main;
+      color: #ff5000;
       border: 1px solid;
-      border-color: $clr-main;
+      border-color: #ff5000;
       border-radius: 0.25rem;
 
       @include ma-transition(all, 0.3s, ease);
@@ -537,7 +537,7 @@ $g-colors: red, blue, green;
 
       &:hover,
       &.active {
-        background-color: $clr-main;
+        background-color: #ff5000;
         color: $clr-white;
 
         .ma-page-link {
@@ -586,7 +586,7 @@ $g-colors: red, blue, green;
       .info-icon,
       .info-img-icon {
         transform: translateY(-5px);
-        background-color: rgba($clr-main-rgb, 1);
+        background-color: rgba(#ff5000, 1);
         color: $clr-white;
       }
     }
@@ -620,7 +620,7 @@ $g-colors: red, blue, green;
     font-size: 2rem;
     padding: 0.75rem;
     border-radius: 0.25rem;
-    background-color: rgba($clr-main-rgb, 0.15);
+    background-color: rgba(#ff5000, 0.15);
     @include ma-transition(all, 0.3s);
   }
 

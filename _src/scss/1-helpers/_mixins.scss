@@ -12,7 +12,7 @@
   background: linear-gradient($deg + deg, $color-stops...);
 }
 
-@mixin solid-color-bg($bg-color: $clr-main) {
+@mixin solid-color-bg($bg-color: #ff5000) {
   // this mixin adds solid color background to the element uses this mixin
   //takes 2 args with default values
   //1- For the bg color applied to the line
@@ -20,7 +20,7 @@
   background: $bg-color !important;
 }
 
-@mixin solid-color-text($text-color: $clr-main) {
+@mixin solid-color-text($text-color: #ff5000) {
   // this mixin adds solid color background to the element uses this mixin
   //takes 1 args with default value
   color: $text-color !important;
@@ -104,12 +104,12 @@
   justify-content: center;
   font-size: 1.25rem;
   color: $clr-white;
-  background-color: rgba($clr-main-rgb, 1);
+  background-color: rgba(#ff5000, 1);
   cursor: pointer;
   @include ma-transition(all, 0.3s);
 
   &:hover {
-    background-color: rgba($clr-main-rgb, 0.8);
+    background-color: rgba(#ff5000, 0.8);
   }
 
   &:after {
