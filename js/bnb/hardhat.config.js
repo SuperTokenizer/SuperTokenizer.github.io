@@ -5,8 +5,8 @@ module.exports = {
   solidity: "0.8.18",
   networks: {
     bnb: {
-      url: process.env.RPC_KEY,
-      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      url: 'https://bsc.getblock.io/c9ab71b2-f363-4225-833c-b299c292bcb2/testnet/',
+      accounts: [`0x1efa61372264b615f88b5c77935a43b074a66dd68a43ccb5c3eaf917918e6d44`],
     },
   },
 

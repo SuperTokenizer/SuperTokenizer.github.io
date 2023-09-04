@@ -5,6 +5,23 @@ const {
 const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
 
+// describe("Token Factory", () =>{
+//   const deploy = async ()=>{
+//     const [account] = await ethers.getSigners();
+
+//     const TokenFactory = await ethers.getContractFactory("TokenFactory");
+//     const tokenFactory = await TokenFactory.deploy();
+//     return { tokenFactory, account };
+//   }
+
+//   it("Should deploy new Token contract", async ()=>{
+//     const { tokenFactory, account } = await loadFixture(deploy);
+//     await tokenFactory.connect(account).newToken("Kshitij", "KSHI", 1000);
+//     expect(await tokenFactory.tokens(account.address)[0]).to.not.equal(address(0));
+//   });
+
+// })
+
 describe("Tokenizer", () => {
   // We define a fixture to reuse the same setup in every test.
   // We use loadFixture to run this setup once, snapshot that state,

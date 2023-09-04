@@ -7,8 +7,8 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Tokenizer = await hre.ethers.getContractFactory("Tokenization");
-  const tokenizer = await Tokenizer.deploy("Kshitij", "KSHI", 10000);
+  const Tokenizer = await hre.ethers.getContractFactory("TokenFactory");
+  const tokenizer = await Tokenizer.deploy();
 
   await tokenizer.deployed();
 

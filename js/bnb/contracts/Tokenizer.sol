@@ -3,6 +3,14 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
+contract TokenFactory{
+    mapping(address => address[]) public tokens;
+    function newToken(string memory name, string memory symbol, uint256 maxSupply) public{
+        address token = address(new Tokenization(name, symbol, maxSupply));
+        tokens[msg.sender].push(token);
+    }
+}
+
 contract Tokenization is ERC20 {
     address public owner;
     uint256 public totalSupplyCap;
@@ -13,13 +21,13 @@ contract Tokenization is ERC20 {
         string memory symbol,
         uint256 supplyCap
     ) ERC20(name, symbol) {
-        owner = msg.sender;
+        owner = tx.origin;
         totalSupplyCap = supplyCap;
-        _mint(msg.sender, totalSupplyCap);
+        _mint(owner, totalSupplyCap);
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Only the owner can call this function");
+        require(tx.origin == owner, "Only the owner can call this function");
         _;
     }
 
