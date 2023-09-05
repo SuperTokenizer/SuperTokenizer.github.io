@@ -41,6 +41,48 @@
 		
 		<!-- main-LTR -->
 		<link rel="stylesheet" href="css/main-LTR.css">
+		<style>
+			#metamaskButton {
+                border: solid 2px #444;
+                border-radius: 8px;;
+                font-size:20px;
+                padding: 15px 30px 15px 65px;
+                background: #dd6e2e;
+                background-image: url("assets/images/tokenGenerator/metamaskLogo.png");
+                background-size: 40px;
+                background-repeat: no-repeat;
+                background-position: 20px;
+                font-weight: bold;
+                color: #fff;
+                box-shadow: inset 2px 2px 0 #fff, 0 8px 10px -4px rgba(0,0,0,0.4);
+                cursor: pointer;
+                transition: all 0.4s ease;
+            }
+          
+            #metamaskButton:hover {
+                border: solid 2px #444;
+                border-radius: 8px;;
+                font-size:20px;
+                padding: 15px 30px 15px 65px;
+                background: #f18b50;
+                background-image: url("assets/images/tokenGenerator/metamaskLogo.png");
+                background-size: 40px;
+                background-repeat: no-repeat;
+                background-position: 20px;
+                font-weight: bold;
+                color: #fff;
+                box-shadow: inset 2px 2px 0 #fff, 0 8px 10px -4px rgba(0,0,0,0.4);
+                cursor: pointer;
+                transition: all 0.4s ease;
+            }
+			
+			label {
+                color:black !important;
+            }
+
+            #formTips {display: none;}
+
+		</style>
 	</head>
 	<body class=" dark-theme  landing-page-demo">
 		<!--Start Page Header-->
@@ -52,21 +94,23 @@
 					<div class="header-logo"><a class="logo-link" href="#"><img class="logo-img light-logo" loading="lazy" src="assets/images/logo/logo-dark.png" alt="logo"/><img class="logo-img  dark-logo" loading="lazy" src="assets/images/logo/logo-dark.png" alt="logo"/></a></div>
 					<div class="links menu-wrapper ">
 						<ul class="list-js links-list">
-							<li class="nav-item menu-item has-sub-menu"><a class="nav-link menu-link   active" href="#page-hero">HOME</a></li>
+							<li class="nav-item menu-item has-sub-menu"><a class="nav-link menu-link active" href="#page-hero">HOME</a></li>
 							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#about">ABOUT</a></li>
 							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#howItWorks">HOW IT WORKS</a></li>
+							<li class="nav-item menu-item"><a class="nav-link menu-link" href="tokenGenerator.html">CREATE</a></li>
 							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#faq">FAQ </a></li>
 							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#contact-us">CONTACT</a></li>
 						</ul>
 					</div>
 					<div class="controls-box">
+						<button id="metamaskButton">Connect Metamask</button>
 						<!--Menu Toggler button-->
 						<div class="control  menu-toggler"><span></span><span></span><span></span></div>
 						<!--Dark/Light mode button-->
-						<div class="mode-switcher ">
+						<!-- <div class="mode-switcher ">
 							<div class="switch-inner go-light " title="Switch To Light Mode "><i class="bi bi-sun icon "></i></div>
 							<div class="switch-inner go-dark" title="Switch To Dark Mode "><i class="bi bi-moon icon "></i></div>
-						</div>
+						</div> -->
 						<!--mini shoping cart-->
 					</div>
 				</nav>
@@ -540,5 +584,30 @@
 				<script src="js/vendors/jquery.fancybox.min.js"></script>
 				<!--     main     -->
 				<script src="js/main.js"></script>
+				<script src="js/sweetAlert.js"></script>
+				<script src="js/web3.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	
+				<script>
+					document.getElementById('metamaskButton').addEventListener('click', event => {
+						let account;
+						let button = event.target;
+						ethereum.request({method: 'eth_requestAccounts'}).then(accounts => {
+						account = accounts[0];
+						console.log(account);
+						button.textContent = account;
+						//might add sign out later instead on inner text
+				
+						ethereum.request({method: 'eth_getBalance' , params: [account, 'latest']}).then(result => {
+							console.log(result);
+							// convert balance from hexa to decimal
+							let wei = parseInt(result,16);
+							//since the result will be wei unit, divide per 10^18
+							let balance = wei / (10**18);
+							console.log(balance + " ETH");
+						});
+						});
+					});
+				</script>
 	</body>
 </html>

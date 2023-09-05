@@ -41,6 +41,7 @@
 		
 		<!-- main-LTR -->
 		<link rel="stylesheet" href="css/main-LTR.css">
+        <link rel="stylesheet" href="tokenGenStyle.css">
         <style>
             body {
                 background-color: #fff;
@@ -78,6 +79,12 @@
                 cursor: pointer;
                 transition: all 0.4s ease;
             }
+
+            label {
+                color:black !important;
+            }
+
+            #formTips {display: none;}
         </style>
 	</head>
 	<body class="h-100">
@@ -120,13 +127,14 @@
 				<!-- Start first about div-->
 				<div class="content-block m-auto">
 					<div class="row">
-						<div class="col-12 d-flex align-items-center order-1 order-lg-0 about-col pad-end  wow fadeInUp " data-wow-delay="0.6s">
+						<div class="col-12 d-flex justify-content-center mx-auto about-col pad-end">
 							<div class="text-area ">
 								<div class="sec-heading centered light-title ">
 									<div class="content-area text-center d-flex justify-content-center">
-										<h2 class=" title    wow fadeInUp" data-wow-delay=".2s"><span class='hollow-text d-flex justify-content-center'>TOKENIZER</span></h2>
-											
-									</div><h3>Creating tokens for <span class='featured-text'>  anything.
+										<h2 class=" title wow fadeInUp" data-wow-delay=".2s"><span class='hollow-text d-flex justify-content-center'>TOKENIZER</span></h2>
+									</div>
+
+                                    <h3>Creating tokens for <span class='featured-text'>  anything.
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150" preserveAspectRatio="none">
 													<path d="M7.7,145.6C109,125,299.9,116.2,401,121.3c42.1,2.2,87.6,11.8,87.3,25.7"></path></svg>
 												</span>
@@ -140,35 +148,40 @@
 							</div>
 						</div>
 					</div>
-
-                    <div class="container h-100">
+                    <div class="container h-100 mt-0">
                         <div class="row h-100 justify-content-center align-items-center">
                             <div class="col-10 col-md-8 col-lg-6">
+                                <div class="card shadow-lg" >
+                                <div class="card-body">
                                 <!-- Form -->
-                                <form class="form-example" action="" method="post">
-                                    <h3>Token Information</h3>
-                                    <p class="description">Basic details about your token.</p>
+                                <form class="form" action="" method="post">
+                                    <h3 class="card-title m-3 text-dark">Token Information</h3>
+                                    <p class="description card-title m-3 text-dark">Basic details about your token.</p>
                                     <!-- Input fields -->
-                                    <div class="form-group NameField">
-                                        <label for="tokenInfo" key="Name">Token Name:</label>
+                                    <!-- <fieldset class="form-group">
+                                        <label for="exampleSelect1"  class="lang" key="typeOfToken">Type OF Token</label>
+                                        <select  id = "SelectIWant" class="form-control" name="state" onchange="IWantChange( )">
+                                        </select> -->
+                                    <div class="form-group NameField mb-3">
+                                        <label for="tokenInfo m-3" key="Name">Token Name:</label>
                                         <input type="text" class="form-control" id="tokenName" placeholder="Token Name (For example: BestToken)" name="tokenName">
                                     </div>
-                                    <div class="form-group SymbolField">
+                                    <div class="form-group SymbolField mb-3">
                                         <label for="tokenInfo" key="Symbol">Token Symbol:</label>
                                         <input type="text" class="form-control" id="tokenSymbol" placeholder="Token Symbol (For example: BST)" name="tokenSymbol">
                                     </div>
-                                    <fieldset class="form-group SupplyField">
+                                    <fieldset class="form-group SupplyField mb-3">
                                         <label for="tokenInfo" key="SupplyAmount">Initial Supply Amount:</label>
                                         <input id="supplyAmount" class="form-control" type="text" value=1000000000000 />
                                     </fieldset>
-                                    <fieldset class="form-group MaxSupplyField">
+                                    <fieldset disabled class="form-group MaxSupplyField mb-3">
                                         <label for="tokenInfo" key="SupplyAmount">Max Supply Amount:</label>
                                         <input id="maxSupplyAmount" class="form-control" type="text" value=1000000000000 />
                                     </fieldset>
 
-                                    <a id="addToMetamaskButton" class="btn btn-info shadow text-white" key="addToMetamaskButtonKey">Add Token to Metamask</a>
+                                    <a id="addToMetamaskButton" class="btn btn-info shadow text-white mb-3" key="addToMetamaskButtonKey">Add Token to Metamask</a>
                                       <br>
-                                    <div id="FormTips" class="text-danger" key="FormTipsKey">Please fill out the form completely。</div>
+                                    <div id="formTips" class="text-danger" key="FormTipsKey">Please fill out the form completely。</div>
                                         <img id="loader1" src="loading.gif" alt=""></img>
                                     <button  id="TokenSubmit" class="btn btn-primary ml-auto" type="button" title="Next">Create Token</button>
                                     <!-- End input fields -->
@@ -180,6 +193,8 @@
 				</div>
 				<!--End first about div-->
 				<!-- Start first about div-->
+            </div>
+                </div>
             </div>
         </section>
             <!-- End back-to-top Component-->   
