@@ -94,7 +94,7 @@
 				<!--Start navbar-->
 				<nav class="menu-navbar" id="main-nav">
 					<!-- logo image is repeating 2 times above due to navbar old setup, needs to be reviewed -->
-					<div class="header-logo"><a class="logo-link" href="#"><img class="logo-img light-logo" loading="lazy" src="assets/images/logo/logo-dark.png" alt="logo"/><img class="logo-img  dark-logo" loading="lazy" src="assets/images/logo/logo-dark.png" alt="logo"/></a></div>
+					<div class="header-logo"><a class="logo-link" href="#" alt="logo"><img class="logo-img light-logo" loading="lazy" src="assets/images/logo/logo-dark.png" alt="logo"/><img class="logo-img  dark-logo" loading="lazy" src="assets/images/logo/logo-dark.png" alt="logo"/></a></div>
 					<div class="links menu-wrapper ">
 						<ul class="list-js links-list">
 							<li class="nav-item menu-item has-sub-menu"><a class="nav-link menu-link   active" href="index.html/#home">HOME</a></li>
@@ -163,20 +163,20 @@
                                         <select  id = "SelectIWant" class="form-control" name="state" onchange="IWantChange( )">
                                         </select> -->
                                     <div class="form-group NameField mb-3">
-                                        <label for="tokenInfo m-3" key="Name">Token Name:</label>
+                                        <label for="tokenName" key="Name">Token Name:</label>
                                         <input type="text" class="form-control" id="tokenName" placeholder="Token Name (For example: BestToken)" name="tokenName">
                                     </div>
                                     <div class="form-group SymbolField mb-3">
-                                        <label for="tokenInfo" key="Symbol">Token Symbol:</label>
+                                        <label for="tokenSymbol" key="Symbol">Token Symbol:</label>
                                         <input type="text" class="form-control" id="tokenSymbol" placeholder="Token Symbol (For example: BST)" name="tokenSymbol">
                                     </div>
                                     <fieldset class="form-group SupplyField mb-3">
-                                        <label for="tokenInfo" key="SupplyAmount">Initial Supply Amount:</label>
-                                        <input id="supplyAmount" class="form-control" type="text" value=1000000000000 />
+                                        <label for="supplyAmmount" key="SupplyAmount">Initial Supply Amount:</label>
+                                        <input id="supplyAmount" aria-label="initial Supply Ammount" class="form-control" type="text" value=1000000000000 />
                                     </fieldset>
                                     <fieldset disabled class="form-group MaxSupplyField mb-3">
-                                        <label for="tokenInfo" key="SupplyAmount">Max Supply Amount:</label>
-                                        <input id="maxSupplyAmount" class="form-control" type="text" value=1000000000000 />
+                                        <label for="maxSupplyAmount" key="SupplyAmount">Max Supply Amount:</label>
+                                        <input id="maxSupplyAmount" class="form-control" type="text" value=1000000000000 aria-disabled />
                                     </fieldset>
 
                                     <a id="addToMetamaskButton" class="btn btn-info shadow text-white mb-3" key="addToMetamaskButtonKey">Add Token to Metamask</a>
