@@ -236,7 +236,7 @@
 					let accountAddress;
 					let button = event.target;
 
-					ethereum.request({method: 'eth_requestAccounts'}).then(accounts => {
+					window.ethereum.request({method: 'eth_requestAccounts'}).then(accounts => {
 					let accountAddress = accounts[0];
 					console.log(accountAddress)
 					button.textContent = accountAddress;
@@ -244,9 +244,9 @@
             });
 
 			async function connectWeb3() {
-				if (ethereum.request({ method: 'eth_accounts' })) {
+				if (window.ethereum.request({ method: 'eth_accounts' })) {
 					web3.eth.accounts = new Web3(ethereum.request({ method: 'eth_accounts'}));
-					ethereum.request({method: 'eth_accounts' }).enable();
+					window.ethereum.request({method: 'eth_accounts' }).enable();
 				}
 			}
 
@@ -264,59 +264,64 @@
 
             // get a new copy instance of our abi json structure and contract address
             async function loadContract() {
-            	return await new web3.eth.accounts.Contract([
-				{"inputs": [
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "symbol",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "maxSupply",
-						"type": "uint256"
-					}
-				],
-					"name": "newToken",
-					"outputs": [],
-					"stateMutability": "nonpayable",
-					"type": "function"
-				},
-				{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-					"name": "tokens",
-					"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-					"stateMutability": "view",
-					"type": "function"
-				}
-			], '0xcEDC8145e798144b1ccd21919BD8dCeF026A7171');
-		}
+                const web3 = new Web3(window.ethereum);
+            	return await new web3.eth.Contract([
+                {
+                "inputs": [
+                    {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                    },
+                    {
+                    "internalType": "string",
+                    "name": "symbol",
+                    "type": "string"
+                    },
+                    {
+                    "internalType": "uint256",
+                    "name": "maxSupply",
+                    "type": "uint256"
+                    }
+                ],
+                "name": "newToken",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+                },
+                {
+                "inputs": [
+                    {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                    },
+                    {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                    }
+                ],
+                "name": "tokens",
+                "outputs": [
+                    {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+                }
+            ],
+            '0xBD8D5Acba4f00ffeA7EC84b830028fB4d5a18060'
+            );
+   //console.log("hey")
+	}
 		async function getCurrentAccount() {
 			let accountAddress;
 					let metaMaskBtn = document.getElementById('metamaskButton');
-					ethereum.request({method: 'eth_requestAccounts'}).then(accounts => {
+					window.ethereum.request({method: 'eth_requestAccounts'}).then(accounts => {
 					let accountAddress = accounts[0];
 					console.log(accountAddress)
 					metaMaskBtn.textContent = accountAddress;
@@ -328,7 +333,7 @@
 		// }
 
             //grab the data from the form
-             document.getElementById("tokenForm").addEventListener("submit", function(event) {
+        	document.getElementById("tokenForm").addEventListener("submit", async function(event) {
              event.preventDefault();
              const formData = new FormData(event.target);
              const tokenType = formData.get("tokenType");
@@ -342,19 +347,26 @@
                  symbol: tokenSymbol,
                  maxSupply: parseInt(maxSupply),
              };
+             //console.log()
 			 let type = requestData.tokenType;
 			 let name = requestData.tokenName;
 			 let symbol = requestData.symbol;
 			 let maxSupplyy = requestData.maxSupply;
-			 const account =  getCurrentAccount();
-			 accounts = account[0];
-			const newTokenInfo = window.contract.methods.newToken({type, name, symbol, maxSupply}).send();
+                const accounts =  getCurrentAccount();
+                const account = accounts[0];
+                const contract = await loadContract();
+                console.log(contract);
+                const newTokenInfo = contract.methods.newToken(name, symbol, maxSupply).send({
+                    from: account,
+                    gasPrice: '20000000000'
+                });
             })
 
 			async function load() {
 			await loadWeb3();
+            updateStatus('Ready!');
 			window.contract = await loadContract();
-			updateStatus('Ready!');
+			
 		}
  
         //      .then(data => {
