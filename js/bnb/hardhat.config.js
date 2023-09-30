@@ -8,6 +8,10 @@ module.exports = {
       url: 'https://bsc.getblock.io/c9ab71b2-f363-4225-833c-b299c292bcb2/testnet/',
       accounts: [`0x1efa61372264b615f88b5c77935a43b074a66dd68a43ccb5c3eaf917918e6d44`],
     },
+    eth:{
+      url:'https://eth.getblock.io/12e3d614-2025-499d-b013-af49f6c324b4/sepolia/',
+      accounts:[`0x1efa61372264b615f88b5c77935a43b074a66dd68a43ccb5c3eaf917918e6d44`]
+    }
   },
 
   // // We don<t need following ethescan block for deployment, but we need it for smart contract verification (upload).
