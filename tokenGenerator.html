@@ -256,14 +256,69 @@
 				updateStatus('Ready!');
 			}
 
-			function updateStatus(status) {
+			function    updateStatus(status) {
 				const web3Logged = document.getElementById('metamaskButton');
 				web3Logged.innerHTML = status;
 				console.log(status);
 			}
 
             // get a new copy instance of our abi json structure and contract address
-            async function loadContract() {
+            async function loadContractETH() {
+                const web3 = new Web3(window.ethereum);
+            	return await new web3.eth.Contract([
+                {
+                "inputs": [
+                    {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                    },
+                    {
+                    "internalType": "string",
+                    "name": "symbol",
+                    "type": "string"
+                    },
+                    {
+                    "internalType": "uint256",
+                    "name": "maxSupply",
+                    "type": "uint256"
+                    }
+                ],
+                "name": "newToken",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+                },
+                {
+                "inputs": [
+                    {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                    },
+                    {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                    }
+                ],
+                "name": "tokens",
+                "outputs": [
+                    {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+                }
+            ],
+            '0xBD8D5Acba4f00ffeA7EC84b830028fB4d5a18060'
+            );
+   //console.log("hey")
+	}
+    async function loadContractBNB() {
                 const web3 = new Web3(window.ethereum);
             	return await new web3.eth.Contract([
                 {
@@ -354,7 +409,12 @@
 			 let maxSupplyy = requestData.maxSupply;
                 const accounts =  getCurrentAccount();
                 const account = accounts[0];
-                const contract = await loadContract();
+                let contract;
+                if(type=='ETH'){
+                    contract = await loadContractETH()
+                }else{
+                    contract = await loadContractBNB()
+                }
                 console.log(contract);
                 const newTokenInfo = contract.methods.newToken(name, symbol, maxSupply).send({
                     from: account,
