@@ -1,0 +1,155 @@
+
+document.getElementById('metamaskButton').addEventListener('click', async (event) => {
+    let button = event.target;
+
+    try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        let accountAddress = accounts[0];
+        console.log(accountAddress);
+        button.textContent = accountAddress;
+    } catch (error) {
+        console.error("Error requesting accounts:", error);
+    }
+});
+
+async function connectWeb3() {
+    if (window.ethereum) {
+        window.web3 = new Web3(window.ethereum);
+        try {
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+        } catch (error) {
+            console.error("User denied account access");
+        }
+    }
+}
+
+async function load() {
+    await connectWeb3();
+    window.contract = await loadContract();
+    updateStatus('Ready!');
+}
+
+function updateStatus(status) {
+    const web3Logged = document.getElementById('metamaskButton');
+    web3Logged.innerHTML = status;
+    console.log(status);
+}
+
+// get a new copy instance of our ABI JSON structure and contract address
+async function loadContract() {
+    const web3 = new Web3(window.ethereum);
+    return await new web3.eth.Contract(
+        [
+            {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "symbol",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "maxSupply",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "newToken",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "tokens",
+                "outputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ],
+        '0xBD8D5Acba4f00ffeA7EC84b830028fB4d5a18060'
+    );
+}
+
+async function getCurrentAccount() {
+    try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        let accountAddress = accounts[0];
+        console.log(accountAddress);
+        return accountAddress;
+    } catch (error) {
+        console.error("Error requesting accounts:", error);
+    }
+}
+
+// Event listener for form submission
+const tokenForm = document.getElementById("tokenForm");
+tokenForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    // Disable the button to prevent multiple submissions
+    tokenForm.querySelector("button[type='submit']").disabled = true;
+
+    const formData = new FormData(tokenForm);
+    const tokenType = formData.get("tokenType");
+    const tokenName = formData.get("tokenName");
+    const tokenSymbol = formData.get("tokenSymbol");
+    const maxSupply = formData.get("maxSupply");
+
+    const requestData = {
+        tokenType,
+        name: tokenName,
+        symbol: tokenSymbol,
+        maxSupply: parseInt(maxSupply),
+    };
+
+    let type = requestData.tokenType;
+    let name = requestData.name;
+    let symbol = requestData.symbol;
+    let maxSupplyy = requestData.maxSupply;
+
+    const account = await getCurrentAccount();
+    const contract = await loadContract();
+    console.log(contract);
+
+    try {
+        const gasPrice = await web3.eth.getGasPrice();
+        const transactionReceipt = await contract.methods.newToken(name, symbol, maxSupplyy).send({
+            from: account,
+            gasPrice: gasPrice // Use the dynamically fetched gas price
+        });
+        console.log("Transaction Receipt:", transactionReceipt);
+
+        // Re-enable the button after the transaction is processed
+        tokenForm.querySelector("button[type='submit']").disabled = false;
+    } catch (error) {
+        console.error("Error sending new token info:", error);
+
+        // Re-enable the button on error
+        tokenForm.querySelector("button[type='submit']").disabled = false;
+    }
+});
+
+// Call the load function to initialize your application
+load();
