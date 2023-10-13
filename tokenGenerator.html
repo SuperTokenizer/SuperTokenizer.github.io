@@ -86,6 +86,21 @@
 
             #formTips {display: none;}
         </style>
+
+        
+<script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
+
+<script>
+
+    const MMSDK = new MetaMaskSDK.MetaMaskSDK()
+    // Because init process of the MetaMaskSDK is async.
+    setTimeout(() => {
+        const ethereum = MMSDK.getProvider() // You can also access via window.ethereum
+
+        ethereum.request({ method: 'eth_requestAccounts' })
+    }, 0)
+
+</script>
 	</head>
 	<body class="h-100">
 		<!--Start Page Header-->
@@ -336,6 +351,7 @@
         const tokenForm = document.getElementById("tokenForm");
         tokenForm.addEventListener("submit", async function (event) {
             event.preventDefault();
+            load();
             
             const formData = new FormData(tokenForm);
             // const tokenType = formData.get("tokenType");
@@ -365,7 +381,6 @@
             }
         });
 
-        load();
             </script>
     </body>
 </html>
