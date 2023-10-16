@@ -38,7 +38,10 @@
 		
 		<!-- Font Family -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&amp;display=swap">
-		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 		<!-- main-LTR -->
 		<link rel="stylesheet" href="css/main-LTR.css">
         <link rel="stylesheet" href="tokenGenStyle.css">
@@ -166,7 +169,13 @@
                     <div class="container h-100 mt-0">
                         <div class="row h-100 justify-content-center align-items-center">
                             <div class="col-10 col-md-8 col-lg-6">
+                                <div id="successMessage" class="alert alert-success d-none"></div>
+                                <div id="networkSwitchMessage" class="alert alert-info d-none"></div>
+                                
                                 <div class="card shadow-lg" >
+                                <div id="generationMessage" class="alert alert-info d-none" role="alert">
+                                    Token generation in progress. You can view the progress on the <a id="blockExplorerLink" href="#" target="_blank">block explorer</a>.
+                                </div>
                                 <div class="card-body">
                                 <!-- Form -->
                                 <form class="form" id="tokenForm" method="POST" >
@@ -195,13 +204,12 @@
                                         <input id="maxSupply" class="form-control" name="maxSupply" type="number" min="1" max="100000" required/>
                                     </fieldset>
                                       <br>
-                                    <!-- <div id="formTips" class="text-danger" key="FormTipsKey">Please fill out the form completely。</div> -->
-                                    <div id="errorMessage" style="color: red;"></div><br>
+                                      <div id="errorMessage" class="alert alert-danger d-none"></div>
                                         <img id="loader1" src="loading.gif" alt=""></img>
                                     <button  id="TokenSubmit" class="btn btn-primary ml-auto" type="submit" title="Next">Create Token</button>
                                     <!-- End input fields -->
                                 </form>
-                                <div id="successMessage" style="display: none; color: rgb(67, 240, 67);"></div><br>
+                                
                                 <!-- Form end -->
                             </div>
                         </div>
@@ -253,21 +261,21 @@
             }
         });
 
-        async function connectWeb3(selectedNetwork) {
+        async function connectWeb3() {
             if (window.ethereum) {
                 window.web3 = new Web3(window.ethereum);
-                try {
-                    await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    if (selectedNetwork) {
-                        // Switch to the selected network (BSC or Ethereum)
-                        await window.ethereum.request({
-                            method: 'wallet_switchEthereumChain',
-                            params: [{ chainId: selectedNetwork.chainId }],
-                        });
-                    }
-                } catch (error) {
-                    console.error("User denied account access or network switch:", error);
-                }
+                // try {
+                //     await window.ethereum.request({ method: 'eth_requestAccounts' });
+                //     if (selectedNetwork) {
+                //         // Switch to the selected network (BSC or Ethereum)
+                //         await window.ethereum.request({
+                //             method: 'wallet_switchEthereumChain',
+                //             params: [{ chainId: selectedNetwork.chainId }],
+                //         });
+                //     }
+                // } catch (error) {
+                //     console.error("User denied account access or network switch:", error);
+                // }
              }
         }
 
@@ -338,21 +346,40 @@
         bep20: '0xBD8D5Acba4f00ffeA7EC84b830028fB4d5a18060', // BEP20 contract address
         erc20: '0xc832b4f7E542A4eCc087a37BB12b4B8c2b109f22', // ERC20 contract address
     };
-    async function connectToNetwork(selectedNetwork) {
-        try {
-            await ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: selectedNetwork.chainId }] });
-        } catch (error) {
-            if (error.code === 4902) {
-                // User rejected network switch, handle it here
-                console.error("User rejected network switch:", error);
-            } else {
-                // Handle other errors
-                console.error("Error switching network:", error);
-            }
+    const bscMainnet = {
+    chainId: '0x61' // Binance Smart Chain testnet (assuming Chain ID 97)
+};
+
+const sepoliaTestnet = {
+    chainId: '0xaa36a7' // Sepolia Ethereum Testnet
+};
+async function switchNetworkAndAccount(chainId) {
+    try {
+        document.getElementById('networkSwitchMessage').textContent = 'Setting up your metamask...';
+        document.getElementById('networkSwitchMessage').classList.add('d-block');
+        // Switch to the selected network
+        await ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId }]
+        });
+
+        // Prompt the user to select an account after network switch
+        await ethereum.request({
+            method: 'wallet_requestPermissions',
+            params: [{ eth_accounts: {} }]
+        });
+
+        document.getElementById('networkSwitchMessage').textContent = 'Network switched successfully!';
+    } catch (error) {
+        document.getElementById('networkSwitchMessage').textContent = '';
+        if (error.code === 4001) {
+            document.getElementById('networkSwitchMessage').textContent = 'Permissions needed to continue.';
+        } else {
+            document.getElementById('networkSwitchMessage').textContent = 'Error switching network or requesting permissions.';
+            console.error("Error switching network or requesting permissions:", error);
         }
     }
-
-
+}
         async function loadContract(contractAddress) {
             const web3 = new Web3(ethereum);
             return new web3.eth.Contract(contractABI, contractAddress);
@@ -369,26 +396,12 @@
 
         const tokenForm = document.getElementById("tokenForm");
         const tokenTypeSelect = document.getElementById('tokenType');
+        // Define a mapping of token types to block explorer URLs
+        const blockExplorerUrls = {
+            bep20: 'https://testnet.bscscan.com/tx/',
+            erc20: 'https://sepolia.etherscan.io/tx/',
+        };
 
-        tokenTypeSelect.addEventListener('change', () => {
-            const selectedOption = tokenTypeSelect.value; //check changes in token type
-            let selectedNetwork; // Define the selected network object
-
-            if (selectedOption === 'bep20') {
-                contractAddress = contractAddresses.bep20;
-                // Set selected network to Binance Smart Chain (Mainnet)
-                selectedNetwork = { chainId: '0x61' }; // BSC Mainnet 0x38 Testnet 0X61
-            } else if (selectedOption === 'erc20') {
-                contractAddress = contractAddresses.erc20;
-                // Set selected network to Ethereum (Mainnet)
-                selectedNetwork = { chainId: '0xaa36a7' }; // Ethereum Mainnet 0x1 Sepolia 0xaa36a7?
-            } else {
-                console.error('Invalid token type selected.');
-                return;
-            }
-        connectToNetwork(selectedNetwork);
-        // connectWeb3(selectedNetwork);
-        });
         tokenForm.addEventListener("submit", async function (event) {
             event.preventDefault();
             load();
@@ -404,29 +417,57 @@
 
             if (selectedOption === 'bep20') {
                 contractToUse = contractAddresses.bep20;
+                await switchNetworkAndAccount(bscMainnet.chainId);
+                //selectedNetwork = { chainId: '0x61' };  BSC Mainnet 0x38 Testnet 0X61
             } else if (selectedOption === 'erc20') {
                 contractToUse = contractAddresses.erc20;
+                 // selectedNetwork = { chainId: '0xaa36a7' };Ethereum Mainnet 0x1 Sepolia 0xaa36a7?
+                 await switchNetworkAndAccount(sepoliaTestnet.chainId);
             } else {
                 console.error('Invalid token type selected.');
                 return;
             }
             
+            try {
+                // Enable the selected account
+                await ethereum.enable();
+                document.getElementById('accountSwitchMessage').textContent = 'Account enabled successfully.';
+                document.getElementById('accountSwitchMessage').classList.add('alert-success');
+                document.getElementById('accountSwitchMessage').classList.remove('d-none');
+            } catch (error) {
+                // document.getElementById('accountSwitchMessage').textContent = 'Error enabling account.';
+                // document.getElementById('accountSwitchMessage').classList.add('alert-danger');
+                console.error("Error enabling account:", error);
+            }
             const requestData = {
                 // tokenType,
                 name: tokenName,
                 symbol: tokenSymbol,
                 maxSupply: web3.utils.toWei(maxSupply, 'ether'), // Convert to wei,
             };
-            
             const account = await getCurrentAccount();
             const contract = await loadContract(contractToUse);
             
             try {
+
                 const gasPrice = await web3.eth.getGasPrice();
                 const transaction = await contract.methods.newToken(requestData.name, requestData.symbol, requestData.maxSupply).send({
                     from: account,
                     gasPrice: gasPrice,
                 });
+                 // Transaction confirmed, update the message and link with the transaction hash
+                 const transactionHash = transaction.transactionHash;
+                 const blockExplorerLink = `${blockExplorerUrls[selectedOption]}${transactionHash}`;
+                 
+                 document.getElementById('networkSwitchMessage').classList.add('d-none');
+                tokenForm.classList.add('d-none');
+                 document.getElementById('generationMessage').textContent = 'Token generation in progress. You can view the progress on the ';
+                 document.getElementById('generationMessage').classList.add('alert-success');
+                 document.getElementById('generationMessage').classList.remove('alert-info');
+                 document.getElementById('generationMessage').classList.remove('d-none');
+                 document.getElementById('blockExplorerLink').href = blockExplorerLink;
+                 
+                 document.getElementById('blockExplorerLink').classList.remove('d-none');
                 console.log("Transaction Receipt:", transaction);
             } catch (error) {
                 console.error("Error sending new token info:", error);
