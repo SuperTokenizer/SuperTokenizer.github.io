@@ -1,8 +1,3 @@
-/*===================================================
-Project: AI2BC SmartLet Property Managament
-Inspired by: AminThemes
-====================================================*/
-
 //GLOBAL VARIBALES
 
 //selector constants
@@ -16,8 +11,7 @@ const main_window = $(window),
   toTopBtn = $(".back-to-top"),
   heroVegasSlider = $(".page-hero.hero-vegas-slider"),
   textInput = $("form.main-form .text-input"),
-  tabLink = $(".ma-tabs .tabs-links .tab-link"),
-  portfolioGroup = $(".portfolio .portfolio-group");
+  tabLink = $(".ma-tabs .tabs-links .tab-link")
 
 $(function () {
   ("use strict");
@@ -37,36 +31,14 @@ $(function () {
     }
   }
 
-  // Start open/close navbar search box
-  $(".header-search-box form").on("click", function (e) {
-    e.stopPropagation();
-  });
 
-  $(".header-search-btn").on("click", function () {
-    $(".header-search-box").addClass("show");
-
-    setTimeout(function () {
-      $(".search-input").focus();
-    }, 1000);
-  });
-
-  /* ********* Start dark mode switcher ***********/
-
-  const modeSwitcher = $(".mode-switcher");
-  const themeStoredKey = "ThemeColor";
-  const darkTheme_class = "dark-theme";
+ 
   const lightTheme_class = "light-theme";
-  const themeStoredItem = localStorage.getItem(themeStoredKey);
 
   /*********  Custom functions Area *********/
 
   function setThemeMode(themeColor) {
-    if (themeColor === darkTheme_class) {
-      pageBody.addClass(darkTheme_class);
-      modeSwitcher.addClass(darkTheme_class).removeClass(lightTheme_class);
-      localStorage.setItem(themeStoredKey, darkTheme_class);
-      localStorage.removeItem(lightTheme_class);
-    }
+   
     if (themeColor === lightTheme_class) {
       pageBody.removeClass(darkTheme_class);
       modeSwitcher.addClass(lightTheme_class).removeClass(darkTheme_class);
@@ -75,41 +47,15 @@ $(function () {
     }
   }
 
-  /* *******  Set the theme according to the local storage value ********/
-  // if local storge not set or the body has class value of .dark-theme THEN default theme is dark
-  if (!themeStoredItem && !pageBody.hasClass(darkTheme_class)) {
-    setThemeMode(darkTheme_class);
-  }
   // the only case to be light mode is when the local storge has he value of light-theme
   if (themeStoredItem === lightTheme_class) {
     setThemeMode(lightTheme_class);
   }
 
-  // if local storge or the body has class value of .dark-theme
-  if (
-    themeStoredItem === darkTheme_class ||
-    pageBody.hasClass(darkTheme_class)
-  ) {
-    setThemeMode(darkTheme_class);
-  }
-
-  /* ******* Set the theme by clicking the theme switcher ********/
-  $(modeSwitcher).on("click", function () {
-    if ($(this).is("." + darkTheme_class)) {
-      setThemeMode(lightTheme_class);
-    } else if ($(this).is("." + lightTheme_class)) {
-      setThemeMode(darkTheme_class);
-    }
-  });
 
   /********************************
    *  START #page-header js rules
    *********************************/
-
-  /* *******  start open/close navbar search box   ********/
-  $(".header-search-box .close-search , .header-search-box").on("click", () => {
-    $(".header-search-box").removeClass("show");
-  });
 
   if (navMain) {
     $(bdyOnePage).scrollspy({
@@ -263,27 +209,6 @@ $(function () {
     });
   });
 
-  /* ******* Start Percentage loading screen interactions ********/
-  let percentage = 0;
-  let LoadingCounter = setInterval(function () {
-    if (percentage <= 100) {
-      // $('#loading-screen ').css('opacity', (100 - percentage));
-      $("#loading-screen .loading-counter").text(percentage + "%");
-      $("#loading-screen .bar").css("width", (100 - percentage) / 2 + "%");
-      $("#loading-screen .progress-line").css(
-        "transform",
-        "scale(" + percentage / 100 + ")"
-      );
-      percentage++;
-    } else {
-      $("#loading-screen").fadeOut(500);
-      setTimeout(() => {
-        $("#loading-screen").remove();
-      }, 1500);
-      clearInterval(LoadingCounter);
-    }
-  }, 10);
-
   main_window.on("scroll", function () {
     if ($(this).scrollTop() > 50) {
       //show back to top btn
@@ -372,183 +297,8 @@ $(function () {
     Start Vendors plugins options Area 
     *********************************/
 
-  //initialize swiper [Hero Section] //fade slider
-  if ($(".hero-swiper-slider.fade-effect .swiper-container").length) {
-    const heroSlider = new Swiper(
-      ".hero-swiper-slider.fade-effect .swiper-container",
-      {
-        speed: 1000,
-        loop: true,
-        reverseDirection: true,
-        effect: "fade",
-        fadeEffect: {
-          crossFade: true,
-        },
-        on: {
-          init: function () {
-            let thisSlider = this;
-            $(".slides-count").html("0" + (this.slides.length - 2));
-            $(".curent-slide").html("0" + (this.realIndex + 1));
-          },
-          slideChange: function () {
-            $(".curent-slide").html("0" + (this.realIndex + 1));
-          },
-        },
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: true,
-        },
-        pagination: {
-          el: ".hero-swiper-slider.fade-effect .swiper-pagination",
-          type: "bullets",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".hero-swiper-slider.fade-effect .swiper-button-next",
-          prevEl: ".hero-swiper-slider.fade-effect .swiper-button-prev",
-        },
-      }
-    );
-  }
-  if ($(".hero-swiper-slider.slide-effect .swiper-container").length) {
-    const heroSlider = new Swiper(
-      ".hero-swiper-slider.slide-effect .swiper-container",
-      {
-        speed: 1000,
-        loop: true,
-        reverseDirection: true,
-        effect: "slide",
-        fadeEffect: {
-          crossFade: true,
-        },
-        on: {
-          init: function () {
-            let thisSlider = this;
-            $(".slides-count").html("0" + (this.slides.length - 2));
-            $(".curent-slide").html("0" + (this.realIndex + 1));
-          },
-          slideChange: function () {
-            $(".curent-slide").html("0" + (this.realIndex + 1));
-          },
-        },
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: true,
-        },
-        pagination: {
-          el: ".hero-swiper-slider.slide-effect .swiper-pagination",
-          type: "bullets",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".hero-swiper-slider.slide-effect .swiper-button-next",
-          prevEl: ".hero-swiper-slider.slide-effect .swiper-button-prev",
-        },
-      }
-    );
-  }
 
-  // initialize swiper [Testimonials with 1 Column]
-  if ($(".testimonials-1-col  .swiper-container").length) {
-    const testimonialsSlider_1 = new Swiper(
-      ".testimonials-1-col  .swiper-container",
-      {
-        // Optional parameters
-        speed: 500,
-        loop: true,
-        grabCursor: true,
-        slidesPerView: 1,
-        spaceBetween: 50,
-        delay: 5000,
-        autoplay: {
-          delay: 5000,
-        },
-        navigation: {
-          nextEl: ".testimonials-1-col .swiper-button-next",
-          prevEl: ".testimonials-1-col .swiper-button-prev",
-        },
-        on: {
-          resize: function () {
-            this.update();
-          },
-        },
-      }
-    );
-  }
 
-  //initialize swiper [clients Section]
-  if ($(".our-clients .swiper-container").length) {
-    const partenersSlider = new Swiper(".our-clients .swiper-container", {
-      // Optional parameters
-      speed: 600,
-      loop: true,
-      spaceBetween: 20,
-      grabCursor: true,
-      delay: 5000,
-      autoplay: {
-        delay: 5000,
-      },
-      slidesPerView: 3,
-      breakpoints: {
-        991: {
-          slidesPerView: 6,
-          spaceBetween: 30,
-        },
-      },
-    });
-  }
-
-  //initialize swiper [portfolio-slider]
-  if ($(".portfolio-slider .swiper-container").length) {
-    const swiperPortfolioSlider = new Swiper(
-      ".portfolio-slider .swiper-container",
-      {
-        speed: 600,
-        loop: true,
-        centeredSlides: true,
-        slidesPerView: 1,
-        spaceBetween: 30,
-        autoplay: {
-          delay: 5000,
-        },
-        breakpoints: {
-          991: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-          },
-        },
-        navigation: {
-          nextEl: ".portfolio-slider .swiper-button-next",
-          prevEl: ".portfolio-slider .swiper-button-prev",
-        },
-      }
-    );
-  }
-
-  //initialize swiper [portfolio-single]
-  if (
-    $(".portfolio-single .portfolio-single-slider .swiper-container").length
-  ) {
-    const swiperPortfolioSingleSlider = new Swiper(
-      ".portfolio-single .portfolio-single-slider .swiper-container",
-      {
-        spaceBetween: 10,
-        grabCursor: true,
-        reverseDirection: true,
-        loop: true,
-        slidesPerView: 1,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: true,
-        },
-
-        navigation: {
-          nextEl: ".portfolio-single-slider .swiper-button-next",
-          prevEl: ".portfolio-single-slider .swiper-button-prev",
-        },
-      }
-    );
-  }
 
   /* *******  loading  wow.js  Options ********/
   const wow = new WOW({
@@ -566,13 +316,6 @@ $(function () {
     });
   }
 
-  /* *******  loading tilt.js library ********/
-  if (jQuery().tilt) {
-    $("[data-tilt]").tilt({
-      perspective: 1000,
-    });
-  }
-
   /* *******  Loading the isotope plugin ********/
   if (jQuery().isotope) {
     portfolioGroup.isotope({
@@ -584,122 +327,6 @@ $(function () {
       stagger: 30,
       containerStyle: null,
     });
-  }
-
-  /* *******  Start particles.js ********/
-  if ($(".particles-js.dots").length) {
-    // constant to hold the particals options
-    const customParticlesOptions = {
-      particles: {
-        number: {
-          value: 150,
-          density: {
-            enable: true,
-            value_area: 500,
-          },
-        },
-        color: {
-          value: "#09aff4",
-        },
-        shape: {
-          type: "circle",
-          stroke: {
-            width: 0,
-            color: "#000000",
-          },
-          polygon: {
-            nb_sides: 5,
-          },
-          image: {
-            src: "img/github.svg",
-            width: 100,
-            height: 100,
-          },
-        },
-        opacity: {
-          value: 0.5,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 1,
-            opacity_min: 0,
-            sync: false,
-          },
-        },
-        size: {
-          value: 3,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 5,
-            size_min: 0.3,
-            sync: false,
-          },
-        },
-        line_linked: {
-          enable: false,
-          distance: 150,
-          color: "#ffffff",
-          opacity: 0.4,
-          width: 1,
-        },
-        move: {
-          enable: true,
-          speed: 5,
-          direction: "none",
-          random: true,
-          straight: false,
-          out_mode: "out",
-          bounce: false,
-          attract: {
-            enable: false,
-            rotateX: 600,
-            rotateY: 1200,
-          },
-        },
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: {
-            enable: false,
-            mode: "bubble",
-          },
-          onclick: {
-            enable: false,
-            mode: "repulse",
-          },
-          resize: true,
-        },
-        modes: {
-          grab: {
-            distance: 400,
-            line_linked: {
-              opacity: 1,
-            },
-          },
-          bubble: {
-            distance: 250,
-            size: 0,
-            duration: 2,
-            opacity: 0,
-            speed: 3,
-          },
-          repulse: {
-            distance: 400,
-            duration: 0.4,
-          },
-          push: {
-            particles_nb: 4,
-          },
-          remove: {
-            particles_nb: 2,
-          },
-        },
-      },
-      retina_detect: true,
-    };
-    particlesJS("particles-js", customParticlesOptions);
   }
 
   /* *******  loading Splitting.js library ********/
