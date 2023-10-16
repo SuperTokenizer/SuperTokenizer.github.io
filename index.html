@@ -6,9 +6,12 @@
 		<title>Tokenizer Home</title>
 		<meta name="description" content="Tokenise Your World with Ease: Introducing Tokeniser - Your One-Click Solution for Creating and Managing Tokens. From Transactions to Ownership, Unleash the Potential Today!" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<!-- fav icon -->
-		<link rel="icon" href="assets/images/fav-icon/fav-icon.png">
-		
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+				
 		<!-- bootstarp -->
 		<link rel="stylesheet" href="css/vendors/bootstrap.min.css">
 		
@@ -52,40 +55,6 @@
 		</script>
 
 		<style>
-			#metamaskButton {
-                border: solid 2px #444;
-                border-radius: 8px;;
-                font-size:20px;
-                padding: 15px 30px 15px 65px;
-                background: #dd6e2e;
-                background-image: url("assets/images/tokenGenerator/metamaskLogo.png");
-                background-size: 40px;
-                background-repeat: no-repeat;
-                background-position: 20px;
-                font-weight: bold;
-                color: #fff;
-                box-shadow: inset 2px 2px 0 #fff, 0 8px 10px -4px rgba(0,0,0,0.4);
-                cursor: pointer;
-                transition: all 0.4s ease;
-            }
-          
-            #metamaskButton:hover {
-                border: solid 2px #444;
-                border-radius: 8px;;
-                font-size:20px;
-                padding: 15px 30px 15px 65px;
-                background: #f18b50;
-                background-image: url("assets/images/tokenGenerator/metamaskLogo.png");
-                background-size: 40px;
-                background-repeat: no-repeat;
-                background-position: 20px;
-                font-weight: bold;
-                color: #fff;
-                box-shadow: inset 2px 2px 0 #fff, 0 8px 10px -4px rgba(0,0,0,0.4);
-                cursor: pointer;
-                transition: all 0.4s ease;
-            }
-
 			label {
                 color:black !important;
             }
@@ -94,7 +63,7 @@
 
 		</style>
 	</head>
-	<body class=" dark-theme  landing-page-demo">
+	<body class="light-theme  landing-page-demo">
 		<!--Start Page Header-->
 		<header class=" header-basic" id="page-header">
 			<div class="container">
@@ -109,19 +78,12 @@
 							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#howItWorks">HOW IT WORKS</a></li>
 							<li class="nav-item menu-item"><a class="nav-link menu-link" href="tokenGenerator.html">CREATE</a></li>
 							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#faq">FAQ </a></li>
-							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#contact-us">CONTACT</a></li>
+							<!-- <li class="nav-item menu-item"><a class="nav-link menu-link" href="#contact-us">CONTACT</a></li> -->
 						</ul>
 					</div>
 					<div class="controls-box">
-						<button id="metamaskButton">Connect Metamask</button>
 						<!--Menu Toggler button-->
 						<div class="control  menu-toggler"><span></span><span></span><span></span></div>
-						<!--Dark/Light mode button-->
-						<!-- <div class="mode-switcher ">
-							<div class="switch-inner go-light " title="Switch To Light Mode "><i class="bi bi-sun icon "></i></div>
-							<div class="switch-inner go-dark" title="Switch To Dark Mode "><i class="bi bi-moon icon "></i></div>
-						</div> -->
-						<!--mini shoping cart-->
 					</div>
 				</nav>
 			</div>
@@ -208,7 +170,7 @@
 					<div class="col-12 col-md-6 col-lg-4 mx-auto ">
 						<!--Start First service box-->
 						<div class="box service-box  wow fadeInUp reveal-start" data-wow-offset="0" data-wow-delay=".1s">
-							<div class="service-icon"><i class="flaticon-web-development font-icon"></i></div><span class="service-num hollow-text">1    </span>
+							<div class="service-icon"></div><span class="service-num hollow-text">1    </span>
 							<div class="service-content">
 								<p class="service-title text-center" style="color: #ff5000;">Step 1</p>
 								<h3 class="service-title text-center">Defining your needs</h3>
@@ -223,7 +185,7 @@
 					<div class="col-12 col-md-6 col-lg-4 mx-auto ">
 						<!--Start Second service box-->
 						<div class="box service-box  wow fadeInUp reveal-start" data-wow-offset="0" data-wow-delay=".2s">
-							<div class="service-icon"><i class="flaticon-nanotechnology font-icon"></i></div><span class="service-num hollow-text">2    </span>
+							<div class="service-icon"></i></div><span class="service-num hollow-text">2    </span>
 							<div class="service-content">
 								<p class="service-title text-center" style="color: #ff5000;">Step 2</p>
 								<h3 class="service-title text-center">Tailored Tokenisation </h3>
@@ -238,7 +200,7 @@
 					<div class="col-12 col-md-6  col-lg-4 mx-auto  ">
 						<!--Start Third service box-->
 						<div class="box service-box  wow fadeInUp reveal-start" data-wow-offset="0" data-wow-delay=".3s">
-							<div class="service-icon"><i class="flaticon-web-domain font-icon"></i></div><span class="service-num hollow-text">3    </span>
+							<div class="service-icon"></div><span class="service-num hollow-text">3    </span>
 							<div class="service-content">
 								<p class="service-title text-center" style="color: #ff5000;">Step 3</p>
 								<h3 class="service-title text-center">Transcend and Tokenise</h3>
@@ -285,15 +247,6 @@
 									Webpage, Social media integration (Auto Discord/Telegram),
 									 Email services, Database access, and full entry to all the Dashboards.</span>
 								</p>
-								<!-- <ul class="plan-list">
-									<li class="plan-feat "> </li>
-									<li class="plan-feat "> <span class="feat-text">Email integration (Microsoft and Gmail). </span></li>
-									<li class="plan-feat "> <span class="feat-text">Post-showing feedback from renters.</span></li>
-									<li class="plan-feat "> <span class="feat-text">PM Software Integration.</span></li>
-									<li class="plan-feat "> <span class="feat-text">Follow-up email and SMS.</span></li>
-									<li class="plan-feat "> <span class="feat-text">Public website with chatbot.</span></li>
-									<li class="plan-feat "> <span class="feat-text">Two-way calendar sync..</span></li>
-								</ul> -->
 							</div>
 							<div class="plan-cta"><a class="cta-btn btn-outline " href="#0">Select Package</a></div>
 						</div>
@@ -384,11 +337,11 @@
 								</div>
 								<div class="collapse " id="collapse-1" aria-labelledby="collapse-1" data-bs-parent="#accordion">
 									<div class="card-body">
-										<p class="faq-answer">Tokenisation is the process of creating digital assets, or tokens, that 
+										<p class="faq-answer">Tokenization is the process of creating digital assets, or tokens, that 
 											can represent various forms of value, ownership, or utility in the digital world. These tokens 
-											can be used for payments, rewards, ownership representation, and more. Tokenisation offers a new 
-											level of flexibility and accessibility in various industries. By utilising tokenisation, you can 
-											enhance engagement, enable fractional ownership, and revolutionise transactions in your ecosystem.</p>
+											can be used for payments, rewards, ownership representation, and more. Tokenization offers a new 
+											level of flexibility and accessibility in various industries. By utilising tokenization, you can 
+											enhance engagement, enable fractional ownership, and revolutionize transactions in your ecosystem.</p>
 									</div>
 								</div>
 							</div>
@@ -439,7 +392,7 @@
 		<!-- End  faq Section-->
 
 		<!-- Start Form Section-->
-		<section class="contact-us  mega-section pt-0 pb-0" id="contact-us">
+		<!-- <section class="contact-us  mega-section pt-0 pb-0" id="contact-us">
 			<div class="container">
 				<section class="contact-us-form-section  mega-section  ">
 					<div class="row">
@@ -451,9 +404,9 @@
 									</div>
 								</div>
 								<div class="contact-form-inputs wow fadeInUp" data-wow-delay=".6s">
-									<div class="custom-form-area input-boxed"> 
+									<div class="custom-form-area input-boxed"> -->
 										<!--Form To have user messages-->
-										<form class="main-form" id="contact-us-form" action="php/send-mail.php" method="post"><span class="done-msg"></span>
+										<!--<form class="main-form" id="contact-us-form" action="php/send-mail.php" method="post"><span class="done-msg"></span>
 											<div class="row ">
 												<div class="col-12 col-lg-6">
 													<div class="   input-wrapper">
@@ -489,7 +442,7 @@
 							</div>
 						</div>
 					</div>
-				</section>
+				</section> -->
 
 		<!-- Start  page-footer Section-->
 		<footer class="bg-dark dark-color-footer d-flex" id="page-footer">
@@ -563,9 +516,6 @@
 			</div>
 		</footer>
 		<!-- End  page-footer Section-->
-		<!-- Start loading-screen Component-->
-		<div class="loading-screen" id="loading-screen"><span class="bar top-bar"></span><span class="bar down-bar"></span><span class="progress-line"></span><span class="loading-counter"> </span></div>
-		<!-- End loading-screen Component-->
 		<!-- Start back-to-top Component-->
 		<div class="back-to-top" id="back-to-top"><i class="bi bi-arrow-up icon "></i>
 		</div>
@@ -582,10 +532,6 @@
 				<script src="js/vendors/wow.min.js"></script>
 				<!--     swiper     -->
 				<script src="js/vendors/swiper-bundle.min.js"></script>
-				<!--     particles     -->
-				<script src="js/vendors/particles.min.js"></script>
-				<!--     Vanilla-tilt     -->
-				<script src="js/vendors/vanilla-tilt.min.js"></script>
 				<!--     isotope     -->
 				<script src="js/vendors/isotope-min.js"></script>
 				<!--     fancybox     -->
@@ -595,28 +541,6 @@
 				<script src="js/sweetAlert.js"></script>
 				<script src="js/web3.min.js"></script>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-	
-				<script>
-					document.getElementById('metamaskButton').addEventListener('click',async (event) => {
-						let account;
-						let button = event.target;
-						//console.log(window.ethereum)
-						await window.ethereum.request({method: 'eth_requestAccounts'}).then(accounts => {
-						account = accounts[0];
-						console.log(account);
-						button.textContent = account;
-						//might add sign out later instead on inner text
-				
-						ethereum.request({method: 'eth_getBalance' , params: [account, 'latest']}).then(result => {
-							console.log(result);
-							// convert balance from hexa to decimal
-							let wei = parseInt(result,16);
-							//since the result will be wei unit, divide per 10^18
-							let balance = wei / (10**18);
-							console.log(balance + " ETH");
-						});
-						});
-					});
 				</script>
 	</body>
 </html>
