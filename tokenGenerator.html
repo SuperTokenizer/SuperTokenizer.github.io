@@ -377,9 +377,22 @@ async function switchNetworkAndAccount(chainId) {
         }
     }
 }
+
+                    async function testPending(){ 
+                        web3.eth.getPendingTransactions().then((pendingTransactions) => {
+                        if (pendingTransactions.length > 0) {
+                            alert(`Transaction ${transactionHash} is still pending...`);
+                            document.getElementById('tokenForm').classList.add('d-none');
+                            document.getElementById('generationMessage').textContent = 'Transaction is still pending...';
+                            document.getElementById('generationMessage').classList.remove('d-none');
+                        }
+                    });
+                }
+
         async function loadContract(contractAddress) {
             const web3 = new Web3(ethereum);
             return new web3.eth.Contract(contractABI, contractAddress);
+            alert('check pending1.');
         }
 
         async function getCurrentAccount() {
@@ -398,6 +411,30 @@ async function switchNetworkAndAccount(chainId) {
             bep20: 'https://testnet.bscscan.com/tx/',
             erc20: 'https://sepolia.etherscan.io/tx/',
         };
+
+       // Variable to keep track of whether the user has confirmed the transaction
+let userConfirmed = false;
+
+// Listen for user confirmation of the transaction
+ethereum.on('wallet:transactions:confirmation', (transaction) => {
+    userConfirmed = true;
+    alert(`Transaction in progress !`);
+    document.getElementById('tokenForm').classList.add('d-none');
+    document.getElementById('generationMessage').textContent = 'Token generation in progress.';
+    document.getElementById('generationMessage').classList.remove('d-none');
+    document.getElementById('generationMessage').classList.add('alert-info');
+});
+
+// Listen for blockchain confirmation
+ethereum.on('confirmation', (confirmationNumber, receipt) => {
+    if (confirmationNumber === 1 && userConfirmed) {
+        // The transaction is confirmed on the blockchain, and the user has confirmed it
+        alert(`✅The transaction was successful! \nHash: ${receipt.transactionHash}`);
+        document.getElementById('tokenForm').classList.add('d-none');
+        document.getElementById('generationMessage').textContent = 'Your token was successfully created!';
+        document.getElementById('generationMessage').classList.add('alert-success');
+    }
+});
 
         tokenForm.addEventListener("submit", async function (event) {
             event.preventDefault();
@@ -439,44 +476,48 @@ async function switchNetworkAndAccount(chainId) {
                     from: account,
                     gasPrice: gasPrice,
                 });
+                 // Transaction sent, show pending message immediately
+                // alert(`Transaction ${transaction.transactionHash} is still pending...`);
+                // tokenForm.classList.add('d-none');
+               
+                // document.getElementById('generationMessage').textContent = 'Transaction is still pending...';
+                // document.getElementById('generationMessage').classList.remove('d-none'); 
+                // document.getElementById('generationMessage').classList.add('alert-success');
+                // let blockExplorerLink;
 
-                let blockExplorerLink;
-
-                if (selectedOption === 'bep20') {
-                    blockExplorerLink = `${blockExplorerUrls.bep20}`;
-                } else if (selectedOption === 'erc20') {
-                    blockExplorerLink = `${blockExplorerUrls.erc20}`;
-                } else {
-                    console.error('Invalid token type selected.');
-                }
-
+                // if (selectedOption === 'bep20') {
+                //     blockExplorerLink = `${blockExplorerUrls.bep20}`;
+                // } else if (selectedOption === 'erc20') {
+                //     blockExplorerLink = `${blockExplorerUrls.erc20}`;
+                // } else {
+                //     console.error('Invalid token type selected.');
+                // }
+               
+                // async function verifyTransaction(transactionHash) {
+                //     // Get the transaction receipt
+                //     const receipt = await web3.eth.getTransactionReceipt(transactionHash);
+                //      //Check if the receipt is not yet available
+                //      if (receipt == null) {
+                //          alert(`Transaction ${transactionHash} is still pending...`);
+                //          document.getElementById('generationMessage').textContent = 'Transaction is still pending...';
+                //          document.getElementById('generationMessage').classList.remove('d-none');
+                //      }
+                //     // check if there is any pending transaction
+                   
+                //     // Check if the transaction was successful
+                //     if (receipt.status) {
+                //         alert(`✅The transaction was successful! \nHash: ${transactionHash}`);
+                //     } else {
+                //         alert(`💥The transaction failed. \nHash: ${transactionHash}`);
+                //     }
+                // }
+                // verifyTransaction(transaction.transactionHash);
                 // Transaction submitted, hide the form and show the generating message 
                 //This is taking too long and only shows the next msg after the transaction is already confirmed
-                tokenForm.classList.add('d-none');
-                document.getElementById('generationMessage').textContent = 'Token generation in progress...';
-                document.getElementById('generationMessage').classList.remove('d-none');
-                // The number of confirmations to wait for
-                const confirmationsToWaitFor = 1;
-                const transactionHash = transaction.transactionHash;
-                // Listen for transaction confirmation
-                const checkTransactionStatus = async () => {
-                try {
-                    const receipt = await web3.eth.getTransactionReceipt(transactionHash);
-                    if (receipt && receipt.status) {
-                        // The transaction has been confirmed and was successful
-                        document.getElementById('generationMessage').textContent = 'Your token was successfully created!';
-                        // You can also add a link to the transaction on a block explorer
-                        const blockExplorerLink = `https://testnet.bscscan.com/tx/${transactionHash}`;
-                        document.getElementById('blockExplorerLink').href = blockExplorerLink;
-                        document.getElementById('blockExplorerLink').classList.remove('d-none');
-                    }
-                } catch (error) {
-                    console.error("Error checking transaction status:", error);
-                }
-                };
-
-                // Call the function to check the transaction status
-                checkTransactionStatus();
+               
+                // document.getElementById('generationMessage').textContent = 'Token generation success...';
+               
+                
             } catch (error) {
                 console.error("Error submitting transaction:", error);
             }
