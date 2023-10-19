@@ -183,11 +183,10 @@
                             <div class="col-10 col-md-8 col-lg-6">
                                 
                                 <div class="card shadow-lg">
-                                <div id="generationMessage" class="alert alert-info d-none" role="alert">
-                                    Token generation in progress. You can view the progress on the <a id="blockExplorerLink" class="d-none" target="_blank"></a>.
-                                </div>
+                                <div id="successMessage" class="alert alert-success d-none"></div>
                                 <div class="card-body">
-                                    <div id="successMessage" class="alert alert-success d-none"></div>
+                                <div id="generationMessage" class="alert alert-info d-none" role="alert"></div>
+                                <a id="blockExplorerLink" target="_blank"></a>
                                 <!-- Form -->
                                 <form class="form d-none" id="tokenForm" method="POST" >
                                     <h3 class="card-title m-3 text-dark">Token Information</h3>
@@ -413,15 +412,17 @@ async function switchNetworkAndAccount(chainId) {
             let contractToUse;
             const bnbExplorerUrl = blockExplorerUrls.bep20;
             const ethExplorerUrl = blockExplorerUrls.erc20;
-
+            let baseUrl;
             if (selectedOption === 'bep20') {
                 contractToUse = contractAddresses.bep20;
                 await switchNetworkAndAccount(bscMainnet.chainId);
+                baseUrl = bnbExplorerUrl;
                 //selectedNetwork = { chainId: '0x61' };  BSC Mainnet 0x38 Testnet 0X61
             } else if (selectedOption === 'erc20') {
                 contractToUse = contractAddresses.erc20;
                  // selectedNetwork = { chainId: '0xaa36a7' };Ethereum Mainnet 0x1 Sepolia 0xaa36a7?
                  await switchNetworkAndAccount(sepoliaTestnet.chainId);
+                 baseUrl = ethExplorerUrl;
             } else {
                 console.error('Invalid token type selected.');
                 return;
@@ -442,27 +443,28 @@ async function switchNetworkAndAccount(chainId) {
                     from: account,
                     gasPrice: gasPrice,
                 })
-                .once('transactionHash', function(hash){
+                .once('transactionHash', (hash) =>{
+                    console.log(`Transaction hash: ${hash}`);
                      document.getElementById('tokenForm').classList.add('d-none');
                      document.getElementById('successMessage').classList.add('d-none');
                      document.getElementById('generationMessage').textContent = 'Your token is being generated! Please wait.';
                      document.getElementById('generationMessage').classList.remove('d-none');
                  })
-                .then(function(receipt){
-                    
+                 .on('receipt', (receipt) => {
+                    const txHash = receipt.transactionHash;
+                    const url = `${baseUrl}${txHash}`;
+                    console.log(`Blockchain URL: ${url}`);
                     document.getElementById('generationMessage').classList.add('d-none');
                     document.getElementById('successMessage').classList.remove('d-none');
                     document.getElementById('successMessage').classList.add('alert-success');
-                    document.getElementById('successMessage').textContent = 'Your token has been created successfully!';
-                    
-                    // add link dinamically to either bsc or eth + transaction hash
-                    let blockExplorerLink;
-                    
-                    const blockExp = document.getElementById('blockExplorerLink');
-                    document.getElementById('generationMessage').classList.remove('d-none');
-                    document.getElementById('generationMessage').textContent = 'You can view your generated token on the';
-                    blockExp.href = blockExplorerLink;
-                    blockExp.textContent = 'block explorer';
+                    document.getElementById('successMessage').textContent = 'Your token has been successfully created!';
+                    document.getElementById('blockExplorerLink').setAttribute('href', url);
+                    document.getElementById('blockExplorerLink').textContent = 'Check your new token on the blockchain explorer here.';
+                    document.getElementById('blockExplorerLink').classList.add('alert-link');
+                    // const link = document.createElement('a');
+                    // link.setAttribute('href', url);
+                    // link.textContent = 'View transaction on blockchain explorer';
+                    // document.body.appendChild(link);
                 })
                 // .on('error', function(error){
                 //     alert(`Transaction ${error} failed`);
