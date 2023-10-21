@@ -55,15 +55,19 @@
 		</script>
 
 		<style>
+			body {
+				background-color: #fff;
+				margin-left: 10%;
+				margin-right: 10%;
+			}
 			label {
                 color:black !important;
             }
-
             #formTips {display: none;}
 
 		</style>
 	</head>
-	<body class="light-theme  landing-page-demo">
+	<body class="light-theme landing-page-demo">
 		<!--Start Page Header-->
 		<header class=" header-basic" id="page-header">
 			<div class="container">
@@ -74,10 +78,10 @@
 					<div class="links menu-wrapper ">
 						<ul class="list-js links-list">
 							<li class="nav-item menu-item has-sub-menu"><a class="nav-link menu-link active" href="#page-hero">HOME</a></li>
-							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#about">ABOUT</a></li>
-							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#howItWorks">HOW IT WORKS</a></li>
-							<li class="nav-item menu-item"><a class="nav-link menu-link" href="tokenGenerator.html">CREATE</a></li>
-							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#faq">FAQ </a></li>
+							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#about" alt="about section">ABOUT</a></li>
+							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#howItWorks" alt="how it works section">HOW IT WORKS</a></li>
+							<li class="nav-item menu-item"><a class="nav-link menu-link" href="tokenGenerator.html" alt="Create Tokens">CREATE TOKENS</a></li>
+							<li class="nav-item menu-item"><a class="nav-link menu-link" href="#faq" alt="Frequently Asked Questions">FAQ</a></li>
 							<!-- <li class="nav-item menu-item"><a class="nav-link menu-link" href="#contact-us">CONTACT</a></li> -->
 						</ul>
 					</div>
@@ -92,7 +96,7 @@
 		<!--End Page Header-->
 		<!-- Start  Page hero-->
 		<section class="page-hero d-flex align-items-center" id="page-hero">
-			<div class="overlay-photo-image-bg" data-bg-img="assets/images/sections-bg-images/herobg.png"></div>
+			<img class="card-img img-fluid" src="assets/images/sections-bg-images/herobg.png" alt="happy person on mobile"></img>
 			<div class="container">
 				<div class="row align-items-center">
 					
@@ -107,14 +111,14 @@
 		
 
 		<!-- Start  about Section-->
-		<section class="about mega-section align-items-center" id="about">
+		<section class="about mega-section align-items-center mt-sm-0 pb-sm-0" id="about">
 			<div class="container">
 				<!-- Start first about div-->
 				<div class="content-block m-auto">
 					<div class="row">
 						<div class="col-12 d-flex align-items-center order-1 order-lg-0 about-col pad-end  wow fadeInUp " data-wow-delay="0.6s">
 							<div class="text-area ">
-								<div class="sec-heading centered light-title ">
+								<div class="sec-heading centered light-title mb-5">
 									<div class="content-area text-center d-flex justify-content-center">
 										<h2 class=" title    wow fadeInUp" data-wow-delay=".2s"><span class='hollow-text d-flex justify-content-center'>TOKENIZER</span></h2>
 									</div><h3>Creating tokens for <span class='featured-text'>  anything.
@@ -123,10 +127,13 @@
 												</span>
 											</h3>
 								</div>
-								<p class="about-text">
+								<p class="about-text mb-2">
 									Everyone has an affinity for tokens, whether they're free tokens, gift tokens, or those used for amusement park rides.
 									 Now, a novel variety of tokens has emerged for the digital realm. And the process of generating these tokens has become 
-									 incredibly simple with our assistance. Wondering why you should be intrigued? The reasons are quite familiar: tokens for
+									 incredibly simple with our assistance. 
+								</p>
+								<p class="about-text mb-2">
+									 Wondering why you should be intrigued? The reasons are quite familiar: tokens for
 									  transactions, the ability to gratify your supporters and clientele, and tokens symbolising fractional ownership, catering
 									   to your cherished ones. Nevertheless, as with any innovation, a horde of consultants materialises, asserting that the concept
 									    is intricate, urging you to part with significant sums of money for their services. Isn't there a more optimal approach? 
@@ -145,7 +152,7 @@
 				<!--End first about div-->
 				<!-- Start first about div-->
 		<!-- Start  about Section-->
-		<section class="services services-boxed mega-section align-items-center" id="howItWorks">
+		<section class="services services-boxed mega-section align-items-center mt-0 p-2" id="howItWorks">
 			<div class="container">
 				<!-- Start first about div-->
 				<div class="content-block m-auto">
@@ -154,7 +161,7 @@
 							<div class="text-area ">
 								<div class="sec-heading centered light-title ">
 									<div class="content-area text-center d-flex justify-content-center">
-										<h2 class=" title    wow fadeInUp" data-wow-delay=".2s"><span class='hollow-text d-flex justify-content-center'>HOW IT WORKS</span></h2>
+										<h2 class=" title wow fadeInUp" data-wow-delay=".2s"><span class='hollow-text d-flex justify-content-center'>HOW IT WORKS</span></h2>
 									</div>
 									<h4>Embarking on the journey of tokenisation has never been this intuitive and exciting</h4>
 									<p class="about-text">
@@ -197,7 +204,7 @@
 						<!-- End Second service box-->
 						</div>
 					</div>
-					<div class="col-12 col-md-6  col-lg-4 mx-auto  ">
+					<div class="col-12 col-md-6  col-lg-4 mx-auto">
 						<!--Start Third service box-->
 						<div class="box service-box  wow fadeInUp reveal-start" data-wow-offset="0" data-wow-delay=".3s">
 							<div class="service-icon"></div><span class="service-num hollow-text">3    </span>
@@ -233,7 +240,7 @@
 				<div class="row">
 					<!--First Plan-->
 					<div class="col-12  col-md-6 col-xl-3  mx-auto price-plan ">
-						<div class="plan wow fadeInUp  " data-wow-delay=".1s ">
+						<div class="plan wow fadeInUp" data-wow-delay=".1s ">
 							<div class="plan-head"><i class="flaticon-nft-1 plan-icon"></i>
 								<h4 class="plane-name">Basic Package</h4>
 								<div class="plan-price">
@@ -275,7 +282,7 @@
 					</div>
 					<!--Third-plan-->
 					<div class="col-12  col-md-6 col-xl-3  mx-auto price-plan ">
-						<div class="plan   featured  wow fadeInUp  " data-wow-delay=".5s ">
+						<div class="plan   featured  wow fadeInUp  " data-wow-delay=".2s ">
 							<div class="plan-head"><i class="flaticon-box plan-icon"></i>
 								<h4 class="plane-name">Custom Package</h4>
 								<div class="plan-price">
@@ -301,7 +308,7 @@
 		<!-- End  pricing Section-->
 
 		<!-- Start  faq Section-->
-		<section class="faq mega-section d-flex justify-content-center" id="faq">
+		<section class="faq mega-section d-flex" id="faq">
 			<div class="shape-top-left"></div>
 			<div class="shape-bottom-right"></div>
 			<div class="pattern-top-end-dir"></div>
@@ -309,28 +316,31 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
-						<div class="sec-heading centered">
-							<div class="content-area mx-5">
-								<h2 class="title wow fadeInUp " data-wow-delay=".2s"><span class='hollow-text'>FAQ</span></h2>
-								<h3 class="mx-auto px-auto text-center justify-content-center">
+						<div class="sec-heading mb-4">
+							<div class="content-area mx-2 justify-content-center">
+								<h2 class="title wow fadeInUp d-flex justify-content-center" data-wow-delay=".2s"><span class='hollow-text text-center'>FAQ</span></h2>
+								<h3 class="mx-auto px-auto mb-4">
 									Welcome to the realm of tokenization, where possibilities are redefined 
 									and digital innovation takes center stage.  
 								</h3>
-								<p class="mx-auto px-auto text-center justify-content-center">If you've ever wondered about the power of tokens – those digital representations of value, 
+								<p class="mx-auto px-auto mt-4">If you've ever wondered about the power of tokens – those digital representations of value, 
 									ownership, and utility – you're in the right place. Our platform is your gateway to effortlessly 
 									bring your ideas to life in the form of tokens, with benefits ranging from enhanced engagement to 
-									streamlined transactions. To provide you with a clearer picture, we've compiled answers to some of 
+									streamlined transactions. 
+								</p>
+								<p class="mx-auto px-auto mt-4">
+									To provide you with a clearer picture, we've compiled answers to some of 
 									the most common questions you might have about our token generating website. Explore the FAQs below 
 									and embark on a journey of transformation and empowerment.
 								</p>
 							</div>
 						</div>
 						<!--Start Accordion List For FAQ-->
-						<div class="faq-accordion " id="accordion">
+						<div class="faq-accordion mt-0" id="accordion">
 							<div class="card mb-2">
 								<div class="card-header " id="heading-1">
 									<h5 class="mb-0 faq-title">
-										<button class="btn btn-link  faq-btn  collapsed" data-bs-toggle="collapse" 
+										<button class="btn btn-link faq-btn collapsed" data-bs-toggle="collapse" 
 											data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1"
 											>What exactly is tokenisation and why should I consider it?</button>
 									</h5>
@@ -348,7 +358,7 @@
 							<div class="card mb-2">
 								<div class="card-header " id="heading-2">
 									<h5 class="mb-0 faq-title">
-										<button class="btn btn-link  faq-btn  collapsed " 
+										<button class="btn btn-link faq-btn collapsed " 
 											data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2">How do I create a token using your platform?</button>
 									</h5>
 								</div>
