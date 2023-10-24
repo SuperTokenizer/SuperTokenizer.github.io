@@ -215,6 +215,7 @@
                 generationMessage.classList.add("alert-info");
                 generationMessage.textContent =
                 "Your token is being generated! Please wait.";
+                document.getElementById("loader1").classList.remove("d-none");
                 
             })
             .on("receipt", (receipt) => {

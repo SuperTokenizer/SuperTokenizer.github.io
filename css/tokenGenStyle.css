@@ -56,3 +56,24 @@ label {
         margin-top: 20%;
     }
 }
+
+#loader1 {
+    max-width: 150px;
+}
+
+.box.service-box.wow.fadeInUp.reveal-start {
+    max-height: 300px;
+  }
+
+  /* temp solution while the pricing plans text differ */
+@media only screen and (min-width: 600px) {
+    #shortPricePlan {
+        height: 670px;
+    }
+    #basicPlan {
+        margin-top: 25%
+    }
+    #btnPricePlan1 {
+        margin-top: 20%;
+    }
+}
