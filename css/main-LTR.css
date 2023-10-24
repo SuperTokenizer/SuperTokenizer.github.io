@@ -1657,7 +1657,7 @@ body.rounded-btns .read-more {
   display: none;
 }
 .content-always-light.header-basic .controls-box .header-search-btn, .is-sticky.header-basic .controls-box .header-search-btn {
-  color: var(--clr-blak);
+  color: var(--clr-black);
 }
 
 .header-basic {
@@ -1681,6 +1681,7 @@ body.rounded-btns .read-more {
 .header-basic .controls-box {
   display: flex;
   align-items: center;
+  color: var(--clr-black)
   /* navbar open btn icon rules  */
 }
 .header-basic .controls-box .control {
@@ -1712,6 +1713,7 @@ body.rounded-btns .read-more {
   width: 30px;
   height: 2px;
   border-radius: 1px;
+  color: black;
   background-color: var(--clr-white);
   transition: all 0.5s ease-in-out 0s;
 }
@@ -4719,6 +4721,7 @@ body.dark-theme .header-basic .header-logo .logo-img.dark-logo {
   display: none;
 }
 body.dark-theme .header-basic .controls-box .header-search-btn {
+  /* color: var(--clr-white); */
   color: var(--clr-white);
 }
 body.dark-theme .header-basic.inner-page-header .header-logo .logo-img.light-logo {
@@ -4728,6 +4731,7 @@ body.dark-theme .header-basic.inner-page-header .header-logo .logo-img.dark-logo
   display: none;
 }
 body.dark-theme .page-hero .hero-social-icons .sc-list .sc-item .sc-link {
+  /* color: var(--clr-white); */
   color: var(--clr-white);
 }
 body.dark-theme .custom-form-area input[type=email],

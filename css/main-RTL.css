@@ -1657,7 +1657,8 @@ body.rounded-btns .read-more {
   display: none;
 }
 .content-always-light.header-basic .controls-box .header-search-btn, .is-sticky.header-basic .controls-box .header-search-btn {
-  color: var(--clr-white);
+  /* color: var(--clr-white); */
+  color: var(--clr-black);
 }
 
 .header-basic {
@@ -1733,7 +1734,8 @@ body.rounded-btns .read-more {
     background-color: #ff5000;
   }
   .header-basic .controls-box .header-search-btn {
-    color: var(--clr-white);
+    /* color: var(--clr-white); */
+    color: var(--clr-black);
   }
 }
 .header-basic .menu-navbar {
