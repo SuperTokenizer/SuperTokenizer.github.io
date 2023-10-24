@@ -1,0 +1,58 @@
+body {
+    background-color: #fff;
+}
+#metamaskButton {
+    border: solid 2px #444;
+    border-radius: 8px;;
+    font-size:20px;
+    padding: 15px 30px 15px 65px;
+    background: #dd6e2e;
+    background-image: url("assets/images/tokenGenerator/metamaskLogo.png");
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-position: 20px;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: inset 2px 2px 0 #fff, 0 8px 10px -4px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+#metamaskButton:hover {
+    border: solid 2px #444;
+    border-radius: 8px;;
+    font-size:20px;
+    padding: 15px 30px 15px 65px;
+    background: #f18b50;
+    background-image: url("assets/images/tokenGenerator/metamaskLogo.png");
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-position: 20px;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: inset 2px 2px 0 #fff, 0 8px 10px -4px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+label {
+    color:black !important;
+}
+
+#formTips {display: none;}
+#heroImage {
+    margin: 0px, 20px, 0px, 20px;
+    width: 80%;
+    height: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/* on mobile */
+@media only screen and (max-width: 600px) {
+    #heroImage {
+        width: 80%;
+        height: auto;
+        margin-top: 20%;
+    }
+}
