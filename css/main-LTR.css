@@ -1713,8 +1713,7 @@ body.rounded-btns .read-more {
   width: 30px;
   height: 2px;
   border-radius: 1px;
-  color: black;
-  background-color: var(--clr-white);
+  background-color: var(--clr-black);
   transition: all 0.5s ease-in-out 0s;
 }
 @media (max-width: 1199px) {
