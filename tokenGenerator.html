@@ -48,67 +48,21 @@
 		<!-- main-LTR -->
 		<link rel="stylesheet" href="css/main-LTR.css">
         <link rel="stylesheet" href="tokenGenStyle.css">
-        <style>
-            body {
-                background-color: #fff;
-            }
-            #metamaskButton {
-                border: solid 2px #444;
-                border-radius: 8px;;
-                font-size:20px;
-                padding: 15px 30px 15px 65px;
-                background: #dd6e2e;
-                background-image: url("assets/images/tokenGenerator/metamaskLogo.png");
-                background-size: 40px;
-                background-repeat: no-repeat;
-                background-position: 20px;
-                font-weight: bold;
-                color: #fff;
-                box-shadow: inset 2px 2px 0 #fff, 0 8px 10px -4px rgba(0,0,0,0.4);
-                cursor: pointer;
-                transition: all 0.4s ease;
-            }
-          
-            #metamaskButton:hover {
-                border: solid 2px #444;
-                border-radius: 8px;;
-                font-size:20px;
-                padding: 15px 30px 15px 65px;
-                background: #f18b50;
-                background-image: url("assets/images/tokenGenerator/metamaskLogo.png");
-                background-size: 40px;
-                background-repeat: no-repeat;
-                background-position: 20px;
-                font-weight: bold;
-                color: #fff;
-                box-shadow: inset 2px 2px 0 #fff, 0 8px 10px -4px rgba(0,0,0,0.4);
-                cursor: pointer;
-                transition: all 0.4s ease;
-            }
+        <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
 
-            label {
-                color:black !important;
-            }
+        <script>
 
-            #formTips {display: none;}
-        </style>
+            const MMSDK = new MetaMaskSDK.MetaMaskSDK()
+            // Because init process of the MetaMaskSDK is async.
+            setTimeout(() => {
+                const ethereum = MMSDK.getProvider() // This can also be accessed via window.ethereum
 
-        
-<script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
+                ethereum.request({ method: 'eth_requestAccounts' })
+            }, 0)
 
-<script>
-
-    const MMSDK = new MetaMaskSDK.MetaMaskSDK()
-    // Because init process of the MetaMaskSDK is async.
-    setTimeout(() => {
-        const ethereum = MMSDK.getProvider() // This can also be accessed via window.ethereum
-
-        ethereum.request({ method: 'eth_requestAccounts' })
-    }, 0)
-
-</script>
+        </script>
 	</head>
-	<body class="h-100">
+	<body class="light-theme h-100">
 		<!--Start Page Header-->
 		<header class=" header-basic" id="page-header">
 			<div class="container">
@@ -169,7 +123,7 @@
                                 <div class="card shadow-lg">
                                     <div class="card-body">
                                         <div class="alert alert-info">
-                                            Before you can start to generate awesome tokens, you need to connect your MetaMask to the Tokenizer.
+                                            Before you can start to generate awesome tokens, you need to connect your MetaMask to the Tokeniser.
                                         </div>
                                         <button id="metamaskButton" class="btn btn-primary btn-block mt-3">Connect MetaMask</button>
                                     </div>
