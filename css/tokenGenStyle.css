@@ -61,9 +61,7 @@ label {
     width: 150px;
 }
 
-.box.service-box.wow.fadeInUp.reveal-start {
-    max-height: 300px;
-  }
+
 
   /* temp solution while the pricing plans text differ */
 @media only screen and (min-width: 600px) {
@@ -76,4 +74,7 @@ label {
     #btnPricePlan1 {
         margin-top: 20%;
     }
+    .box.service-box.wow.fadeInUp.reveal-start {
+    max-height: 300px;
+  }
 }
