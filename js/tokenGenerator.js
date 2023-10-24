@@ -205,7 +205,6 @@
                 gasPrice: gasPrice,
             })
             .once("transactionHash", (hash) => {
-                
                 console.log(`Transaction hash: ${hash}`);
                 const generationMessage = document.getElementById("generationMessage");
                 document.getElementById("tokenForm").classList.add("d-none");
@@ -215,8 +214,7 @@
                 generationMessage.classList.add("alert-info");
                 generationMessage.textContent =
                 "Your token is being generated! Please wait.";
-                document.getElementById("loader1").classList.remove("d-none");
-                
+                document.getElementById("loader1").classList.remove("d-none");                
             })
             .on("receipt", (receipt) => {
                 const txHash = receipt.transactionHash;
@@ -225,7 +223,7 @@
                 const successMessage = document.getElementById("successMessage");
                 const blockExplorerLink = document.getElementById("blockExplorerLink");
                 const moreTokensLink = document.getElementById("moreTokensLink");
-
+                document.getElementById("loader1").classList.add("d-none");
                 console.log(`Blockchain URL: ${url}`);
                 generationMessage.classList.remove("alert-info");
                 generationMessage.classList.add("d-none");
@@ -240,6 +238,7 @@
                 `Click here to check your new amazing token ${String.fromCharCode(9989)}`;
                 blockExplorerLink.classList.add("alert-link");
                 moreTokensLink.classList.remove("d-none");
+                
             });
             // .on('error', function(error){
             //     alert(`Transaction ${error} failed`);

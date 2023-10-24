@@ -58,7 +58,7 @@ label {
 }
 
 #loader1 {
-    max-width: 150px;
+    width: 150px;
 }
 
 .box.service-box.wow.fadeInUp.reveal-start {
