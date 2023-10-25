@@ -3,20 +3,23 @@
     const tokenForm = document.getElementById("tokenForm");
     const tokenTypeSelect = document.getElementById("tokenType");
     // Define a mapping of token types to block explorer URLs
+    /*for testnet: bep20: "https://testnet.bscscan.com/tx/",
+    erc20: "https://sepolia.etherscan.io/tx/",*/
     const blockExplorerUrls = {
-    bep20: "https://testnet.bscscan.com/tx/",
-    erc20: "https://sepolia.etherscan.io/tx/",
+    bep20: "https://bscscan.com/tx/",
+    erc20: "https://etherscan.io/tx/",
     };
     const contractAddresses = {
     bep20: "0xBD8D5Acba4f00ffeA7EC84b830028fB4d5a18060", // BEP20 contract address for tests
     erc20: "0xc832b4f7E542A4eCc087a37BB12b4B8c2b109f22", // ERC20 contract address for tests
     };
     const bscMainnet = {
-    chainId: "0x61", // Binance Smart Chain testnet (assuming Chain ID 97)
+    chainId: "0x38", // FOR Binance Smart Chain testnet use 0x61 for Binance Smart Chain mainnet use 0x38
     };
 
+    //this is now ethereum mainnet and needs to be changed later
     const sepoliaTestnet = {
-    chainId: "0xaa36a7", // Sepolia Ethereum Testnet
+    chainId: "0x1", // FOR Sepolia Ethereum Testnet use 0xaa36a7 for ethereum mainnet use 0x1
     };
 
     // Define your contract ABI and address here
